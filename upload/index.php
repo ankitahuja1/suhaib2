@@ -1,34 +1,29 @@
 <?php
-   if(isset($_FILES['image'])){
-      $errors= array();
-      $file_name = $_FILES['image']['name'];
-      $file_size =$_FILES['image']['size'];
-      $file_tmp =$_FILES['image']['tmp_name'];
-      $file_type=$_FILES['image']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-      $dirname = 'simages';
+if(isset($_POST['image'])){
+    echo "in";
+    $image = $_POST['image'];
+    upload($_POST['image']);
+    exit;
+}
+else{
+    echo "image_not_in";
+    exit;
+}
 
-      $expensions= array("jpeg","jpg","png","jpg");
-      
-      if(in_array($file_ext,$expensions)=== false){
-         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-      }
-      
-      if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"$dirname/$file_name");
-         echo "Success";
-      }else{
-         print_r($errors);
-      }
-   }
+
+function upload($image){
+    $now = DateTime::createFromFormat('U.u', microtime(true));
+    $id = "pleeease";
+
+    $upload_folder = "/var/www/html/new/suhaib2/supload";
+    $path = "$upload_folder/$id.jpg";
+
+    if(file_put_contents($path, base64_decode($image)) != false){
+        echo "uploaded_success"
+    }
+    else{
+        echo "uploaded_failed";
+    }
+}
+
 ?>
-<html>
-   <body>
-      <label for="">New Test</label>
-      <form action="" method="POST" enctype="multipart/form-data">
-         <input type="file" name="image" />
-         <input type="submit"/>
-      </form>
-      
-   </body>
-</html>
