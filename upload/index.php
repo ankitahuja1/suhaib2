@@ -23,7 +23,7 @@
 ?>
 <html>
    <body>
-      
+      <label for="">New Test</label>
       <form action="" method="POST" enctype="multipart/form-data">
          <input type="file" name="image" />
          <input type="submit"/>
