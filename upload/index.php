@@ -6,7 +6,8 @@
       $file_tmp =$_FILES['image']['tmp_name'];
       $file_type=$_FILES['image']['type'];
       $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-      
+      $dirname = 'simages';
+
       $expensions= array("jpeg","jpg","png","jpg");
       
       if(in_array($file_ext,$expensions)=== false){
@@ -14,7 +15,7 @@
       }
       
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"./images/".$file_name);
+         move_uploaded_file($file_tmp,"$dirname/$file_name");
          echo "Success";
       }else{
          print_r($errors);
